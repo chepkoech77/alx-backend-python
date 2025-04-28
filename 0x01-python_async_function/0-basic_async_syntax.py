@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""Basic async syntax"""
-
+"""Contains a coroutine that delays a certain amount of time and returns it"""
 
 import asyncio
 import random
 
 
 async def wait_random(max_delay: int = 10) -> float:
-    """Basics of async
-
-    Args:
-        max_delay (int, optional): max param. Defaults to 10.
-
-    Returns:
-        float: float
     """
-    delay = random.uniform(0, max_delay)
-    await asyncio.sleep(delay)
-    return delay
+    Returns a random float between 0 and max_delay
+    Args:
+        max_delay: The maximum delay to return
+    Returns:
+        A random float between 0 and max_delay
+    """
+    rand = random.uniform(0, max_delay)
+    await asyncio.sleep(rand)
+    return rand

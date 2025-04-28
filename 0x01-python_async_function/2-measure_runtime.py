@@ -1,29 +1,19 @@
 #!/usr/bin/env python3
-"""This module measures time"""
-
-
+"""Contains a method that measure the total execution time of
+a function"""
+from time import perf_counter
 import asyncio
-import time
-from typing import List
 wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
 def measure_time(n: int, max_delay: int) -> float:
-    """_summary_
-
+    """Measure the total execution time of a function
     Args:
-        n (int): _description_
-        max_delay (int): _description_
-
-    Returns:
-        float: _description_
+        n: the number of coroutines to launch
+        max_delay: the maximum amount of time to wait for each coroutine
+    Returns: elapsed time in seconds
     """
-    start_time = time.time()
-
-    loop = asyncio.get_event_loop()
-    delays = loop.run_until_complete(wait_n(n, max_delay))
-
-    end_time = time.time()
-    total_time = end_time - start_time
-
-    return total_time / n
+    start = perf_counter()
+    asyncio.run(wait_n(n, max_delay))
+    elapsed = perf_counter() - start
+    return elapsed / n
